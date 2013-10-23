@@ -11,10 +11,32 @@ package Reika.EnderForest;
 
 import java.net.URL;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.Event.Result;
+import net.minecraftforge.event.ForgeSubscribe;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import Reika.DragonAPI.DragonAPICore;
+import Reika.DragonAPI.Auxiliary.ModList;
 import Reika.DragonAPI.Base.DragonAPIMod;
+import Reika.DragonAPI.Instantiable.ControlledConfig;
 import Reika.DragonAPI.Instantiable.ModLogger;
-import Reika.DragonAPI.Libraries.World.ReikaBiomeHelper;
+import Reika.DragonAPI.Libraries.ReikaRegistryHelper;
+import Reika.EnderForest.Registry.EnderBlocks;
+import Reika.EnderForest.Registry.EnderItems;
+import Reika.EnderForest.Registry.EnderOptions;
+import Reika.EnderForest.World.BiomeEnderForest;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -30,16 +52,64 @@ public class EnderForest extends DragonAPIMod {
 	public static EnderForest instance = new EnderForest();
 	public static ModLogger logger;
 
+	public static final ControlledConfig config = new ControlledConfig(instance, EnderOptions.optionList, EnderBlocks.blockList, EnderItems.itemList, null, 1);
+
+	public static Block[] blocks = new Block[EnderBlocks.blockList.length];
+
+	public static Item[] items = new Item[EnderItems.itemList.length];
+
+	public static final TabEnder tab = new TabEnder(CreativeTabs.getNextID(), instance.getDisplayName());
+
+	public static final Fluid ender = new Fluid("ender");
+
+	public static final Material enderMat = new Material(MapColor.ironColor);
+
 	@Override
 	@EventHandler
 	public void preload(FMLPreInitializationEvent evt) {
-		logger = new ModLogger(instance, true, false, false);
+		config.loadSubfolderedConfigFile(evt);
+		config.initProps(evt);
+		logger = new ModLogger(instance, EnderOptions.LOGLOADING.getState(), EnderOptions.DEBUGMODE.getState(), false);
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		GameRegistry.addBiome(new BiomeEnderForest(ReikaBiomeHelper.getFirstEmptyBiomeIndex()));
+		GameRegistry.addBiome(new BiomeEnderForest(EnderOptions.BIOME.getValue()));
+
+		ReikaRegistryHelper.instantiateAndRegisterBlocks(instance, EnderBlocks.blockList, blocks, logger.shouldLog());
+		ReikaRegistryHelper.instantiateAndRegisterItems(instance, EnderItems.itemList, items, logger.shouldLog());
+
+		ender.setBlockID(EnderBlocks.LIQUID.getBlockID());
+		//ender.setIcons(EnderBlocks.STILL.getBlockInstance().getIcon(0,0), EnderBlocks.FLOWING.getBlockInstance().getIcon(0,0));
+		FluidContainerRegistry.registerFluidContainer(new FluidStack(ender, 1000), EnderItems.BUCKET.getStackOf(), new ItemStack(Item.bucketEmpty));
+
+		if (!ModList.THERMALEXPANSION.isLoaded()) {
+			FluidRegistry.registerFluid(ender);
+		}
+	}
+
+	public Block getEnderBlockToGenerate() {
+		if (ModList.THERMALEXPANSION.isLoaded()) {
+			return Block.blocksList[FluidRegistry.getFluid("ender").getBlockID()];
+		}
+		return EnderBlocks.LIQUID.getBlockInstance();
+	}
+
+	@ForgeSubscribe
+	public void onBucketUse(FillBucketEvent event) {
+		World world = event.world;
+		MovingObjectPosition pos = event.target;
+		int x = pos.blockX;
+		int y = pos.blockY;
+		int z = pos.blockZ;
+		int id = world.getBlockId(x, y, z);
+		if (id == EnderBlocks.LIQUID.getBlockID()) {
+			world.setBlock(x, y, z, 0);
+			event.setResult(Result.ALLOW);
+			event.result = EnderItems.BUCKET.getStackOf();
+		}
 	}
 
 	@Override
