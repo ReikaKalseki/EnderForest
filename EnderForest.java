@@ -78,16 +78,14 @@ public class EnderForest extends DragonAPIMod {
 	public void load(FMLInitializationEvent event) {
 		GameRegistry.addBiome(new BiomeEnderForest(EnderOptions.BIOME.getValue()));
 
-		ReikaRegistryHelper.instantiateAndRegisterBlocks(instance, EnderBlocks.blockList, blocks, logger.shouldLog());
-		ReikaRegistryHelper.instantiateAndRegisterItems(instance, EnderItems.itemList, items, logger.shouldLog());
+		FluidRegistry.registerFluid(ender);
+
+		ReikaRegistryHelper.instantiateAndRegisterBlocks(instance, EnderBlocks.blockList, blocks);
+		ReikaRegistryHelper.instantiateAndRegisterItems(instance, EnderItems.itemList, items);
 
 		ender.setBlockID(EnderBlocks.LIQUID.getBlockID());
 		//ender.setIcons(EnderBlocks.STILL.getBlockInstance().getIcon(0,0), EnderBlocks.FLOWING.getBlockInstance().getIcon(0,0));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(ender, 1000), EnderItems.BUCKET.getStackOf(), new ItemStack(Item.bucketEmpty));
-
-		if (!ModList.THERMALEXPANSION.isLoaded()) {
-			FluidRegistry.registerFluid(ender);
-		}
 	}
 
 	public Block getEnderBlockToGenerate() {
