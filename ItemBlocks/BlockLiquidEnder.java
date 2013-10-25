@@ -13,6 +13,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import Reika.DragonAPI.Libraries.Java.ReikaRandomHelper;
 import Reika.EnderForest.EnderForest;
+import Reika.EnderForest.Registry.EnderOptions;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -59,6 +60,8 @@ public class BlockLiquidEnder extends BlockFluidClassic {
 
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity e) {
+		if (!EnderOptions.ENDER.getState())
+			return;
 		double v = 1;
 		e.motionX = ReikaRandomHelper.getRandomPlusMinus(0, v);
 		e.motionZ = ReikaRandomHelper.getRandomPlusMinus(0, v);

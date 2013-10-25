@@ -1,6 +1,7 @@
 package Reika.EnderForest.ItemBlocks;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -9,9 +10,9 @@ import Reika.DragonAPI.Libraries.World.ReikaWorldHelper;
 import Reika.EnderForest.EnderForest;
 import Reika.EnderForest.Registry.EnderBlocks;
 
-public class EnderBucket extends Item {
+public class ItemEnderBucket extends Item {
 
-	public EnderBucket(int par1) {
+	public ItemEnderBucket(int par1) {
 		super(par1);
 		this.setCreativeTab(EnderForest.tab);
 	}
@@ -38,6 +39,10 @@ public class EnderBucket extends Item {
 		if (!ep.capabilities.isCreativeMode)
 			ep.setCurrentItemOrArmor(0, new ItemStack(Item.bucketEmpty));
 		return true;
+	}
+	
+	public void registerIcons(IconRegister ico) {
+		this.itemIcon = ico.registerIcon("EnderForest:enderbucket");
 	}
 
 }

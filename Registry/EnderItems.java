@@ -16,11 +16,11 @@ import Reika.DragonAPI.Interfaces.IDRegistry;
 import Reika.DragonAPI.Interfaces.RegistrationList;
 import Reika.DragonAPI.Libraries.Java.ReikaStringParser;
 import Reika.EnderForest.EnderForest;
-import Reika.EnderForest.ItemBlocks.EnderBucket;
+import Reika.EnderForest.ItemBlocks.ItemEnderBucket;
 
 public enum EnderItems implements RegistrationList, IDRegistry {
 
-	BUCKET("Ender Bucket", EnderBucket.class);
+	BUCKET("Ender Bucket", ItemEnderBucket.class);
 
 	private String name;
 	private Class itemClass;
