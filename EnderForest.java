@@ -39,6 +39,7 @@ import Reika.EnderForest.Registry.EnderOptions;
 import Reika.EnderForest.World.BiomeEnderForest;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -49,6 +50,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class EnderForest extends DragonAPIMod {
 
+	@Instance("EnderForest")
 	public static EnderForest instance = new EnderForest();
 	public static ModLogger logger;
 
@@ -71,6 +73,9 @@ public class EnderForest extends DragonAPIMod {
 		config.initProps(evt);
 		logger = new ModLogger(instance, EnderOptions.LOGLOADING.getState(), EnderOptions.DEBUGMODE.getState(), false);
 		MinecraftForge.EVENT_BUS.register(this);
+
+		ReikaRegistryHelper.setupModData(instance, evt);
+		ReikaRegistryHelper.setupVersionChecking(evt);
 	}
 
 	@Override
