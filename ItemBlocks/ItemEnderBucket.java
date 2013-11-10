@@ -11,19 +11,19 @@ package Reika.EnderForest.ItemBlocks;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import Reika.DragonAPI.Libraries.World.ReikaWorldHelper;
-import Reika.EnderForest.EnderForest;
 import Reika.EnderForest.Registry.EnderBlocks;
 
 public class ItemEnderBucket extends Item {
 
 	public ItemEnderBucket(int par1) {
 		super(par1);
-		this.setCreativeTab(EnderForest.tab);
+		this.setCreativeTab(CreativeTabs.tabMisc);
 	}
 
 	@Override
@@ -49,9 +49,10 @@ public class ItemEnderBucket extends Item {
 			ep.setCurrentItemOrArmor(0, new ItemStack(Item.bucketEmpty));
 		return true;
 	}
-	
+
+	@Override
 	public void registerIcons(IconRegister ico) {
-		this.itemIcon = ico.registerIcon("EnderForest:enderbucket");
+		itemIcon = ico.registerIcon("EnderForest:enderbucket");
 	}
 
 }

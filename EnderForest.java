@@ -14,7 +14,6 @@ import java.net.URL;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
@@ -28,7 +27,7 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import Reika.DragonAPI.DragonAPICore;
-import Reika.DragonAPI.Auxiliary.ModList;
+import Reika.DragonAPI.ModList;
 import Reika.DragonAPI.Base.DragonAPIMod;
 import Reika.DragonAPI.Instantiable.ControlledConfig;
 import Reika.DragonAPI.Instantiable.ModLogger;
@@ -59,8 +58,6 @@ public class EnderForest extends DragonAPIMod {
 	public static Block[] blocks = new Block[EnderBlocks.blockList.length];
 
 	public static Item[] items = new Item[EnderItems.itemList.length];
-
-	public static final TabEnder tab = new TabEnder(CreativeTabs.getNextID(), instance.getDisplayName());
 
 	public static final Fluid ender = new Fluid("ender");
 
