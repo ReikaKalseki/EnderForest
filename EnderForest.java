@@ -29,6 +29,7 @@ import net.minecraftforge.fluids.FluidStack;
 import Reika.DragonAPI.DragonAPICore;
 import Reika.DragonAPI.ModList;
 import Reika.DragonAPI.Base.DragonAPIMod;
+import Reika.DragonAPI.Instantiable.BiomeCollisionTracker;
 import Reika.DragonAPI.Instantiable.ControlledConfig;
 import Reika.DragonAPI.Instantiable.ModLogger;
 import Reika.DragonAPI.Libraries.ReikaRegistryHelper;
@@ -73,6 +74,8 @@ public class EnderForest extends DragonAPIMod {
 
 		ReikaRegistryHelper.setupModData(instance, evt);
 		ReikaRegistryHelper.setupVersionChecking(evt);
+
+		BiomeCollisionTracker.instance.addBiomeID(ModList.ENDERFOREST, EnderOptions.BIOME.getValue(), BiomeEnderForest.class);
 	}
 
 	@Override
