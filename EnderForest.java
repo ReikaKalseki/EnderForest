@@ -112,6 +112,7 @@ public class EnderForest extends DragonAPIMod {
 			world.setBlock(x, y, z, 0);
 			event.setResult(Result.ALLOW);
 			event.result = EnderItems.BUCKET.getStackOf();
+			//event.entityPlayer.setCurrentItemOrArmor(0, event.result);
 		}
 	}
 
