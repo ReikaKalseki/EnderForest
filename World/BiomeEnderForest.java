@@ -35,7 +35,7 @@ public class BiomeEnderForest extends BiomeGenForest {
 		spawnableMonsterList.clear();
 
 		//boost Enderman spawn rates relative
-		spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 10, 1, 4));
+		spawnableMonsterList.add(new SpawnListEntry(EntityEnderman.class, 7, 1, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntityCreeper.class, 1, 1, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySpider.class, 1, 1, 4));
 		spawnableMonsterList.add(new SpawnListEntry(EntitySkeleton.class, 1, 1, 4));
