@@ -33,6 +33,7 @@ import Reika.DragonAPI.Base.DragonAPIMod;
 import Reika.DragonAPI.Instantiable.ControlledConfig;
 import Reika.DragonAPI.Instantiable.ModLogger;
 import Reika.DragonAPI.Libraries.ReikaRegistryHelper;
+import Reika.DragonAPI.ModInteract.ThermalHandler;
 import Reika.EnderForest.Registry.EnderBlocks;
 import Reika.EnderForest.Registry.EnderItems;
 import Reika.EnderForest.Registry.EnderOptions;
@@ -95,7 +96,7 @@ public class EnderForest extends DragonAPIMod {
 
 	public Block getEnderBlockToGenerate() {
 		if (ModList.THERMALEXPANSION.isLoaded()) {
-			return Block.blocksList[FluidRegistry.getFluid("ender").getBlockID()];
+			return Block.blocksList[ThermalHandler.getInstance().enderID];
 		}
 		return EnderBlocks.LIQUID.getBlockInstance();
 	}
