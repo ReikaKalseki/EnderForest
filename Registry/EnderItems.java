@@ -12,13 +12,12 @@ package Reika.EnderForest.Registry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import Reika.DragonAPI.Interfaces.IDRegistry;
-import Reika.DragonAPI.Interfaces.RegistrationList;
+import Reika.DragonAPI.Interfaces.RegistryEnum;
 import Reika.DragonAPI.Libraries.Java.ReikaStringParser;
 import Reika.EnderForest.EnderForest;
 import Reika.EnderForest.ItemBlocks.ItemEnderBucket;
 
-public enum EnderItems implements RegistrationList, IDRegistry {
+public enum EnderItems implements RegistryEnum {
 
 	BUCKET("Ender Bucket", ItemEnderBucket.class);
 

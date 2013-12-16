@@ -12,13 +12,12 @@ package Reika.EnderForest.Registry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
-import Reika.DragonAPI.Interfaces.IDRegistry;
-import Reika.DragonAPI.Interfaces.RegistrationList;
+import Reika.DragonAPI.Interfaces.RegistryEnum;
 import Reika.DragonAPI.Libraries.Java.ReikaStringParser;
 import Reika.EnderForest.EnderForest;
 import Reika.EnderForest.ItemBlocks.BlockLiquidEnder;
 
-public enum EnderBlocks implements RegistrationList, IDRegistry {
+public enum EnderBlocks implements RegistryEnum {
 
 	LIQUID(BlockLiquidEnder.class, "Liquid Ender");
 
