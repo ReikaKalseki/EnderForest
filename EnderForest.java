@@ -47,7 +47,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = "EnderForest", name="Ender Forest", version="beta", certificateFingerprint = "@GET_FINGERPRINT@", dependencies="after:DragonAPI")
+@Mod(modid = "EnderForest", name="Ender Forest", version="beta", certificateFingerprint = "@GET_FINGERPRINT@", dependencies="required-after:DragonAPI")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class EnderForest extends DragonAPIMod {
 
