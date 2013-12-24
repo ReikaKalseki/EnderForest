@@ -34,6 +34,7 @@ import Reika.DragonAPI.Instantiable.IO.ControlledConfig;
 import Reika.DragonAPI.Instantiable.IO.ModLogger;
 import Reika.DragonAPI.Libraries.ReikaRegistryHelper;
 import Reika.DragonAPI.ModInteract.ThermalHandler;
+import Reika.EnderForest.ItemBlocks.BlockLiquidEnder;
 import Reika.EnderForest.Registry.EnderBlocks;
 import Reika.EnderForest.Registry.EnderItems;
 import Reika.EnderForest.Registry.EnderOptions;
@@ -84,11 +85,12 @@ public class EnderForest extends DragonAPIMod {
 	public void load(FMLInitializationEvent event) {
 		GameRegistry.addBiome(new BiomeEnderForest(EnderOptions.BIOME.getValue()));
 
-		FluidRegistry.registerFluid(ender);
-
 		ReikaRegistryHelper.instantiateAndRegisterBlocks(instance, EnderBlocks.blockList, blocks);
 		ReikaRegistryHelper.instantiateAndRegisterItems(instance, EnderItems.itemList, items);
 
+		FluidRegistry.registerFluid(ender);
+		BlockLiquidEnder b = (BlockLiquidEnder)EnderBlocks.LIQUID.getBlockInstance();
+		ender.setIcons(b.theIcon[0], b.theIcon[1]);
 		ender.setBlockID(EnderBlocks.LIQUID.getBlockID());
 		//ender.setIcons(EnderBlocks.STILL.getBlockInstance().getIcon(0,0), EnderBlocks.FLOWING.getBlockInstance().getIcon(0,0));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(ender, 1000), EnderItems.BUCKET.getStackOf(), new ItemStack(Item.bucketEmpty));

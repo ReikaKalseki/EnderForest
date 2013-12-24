@@ -28,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockLiquidEnder extends BlockFluidClassic {
 
-	private Icon[] theIcon = new Icon[2];
+	public Icon[] theIcon = new Icon[2];
 
 	public BlockLiquidEnder(int par1, Material par2Material) {
 		//super(par1, EnderForest.ender, par2Material);
