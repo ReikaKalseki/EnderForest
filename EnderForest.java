@@ -26,6 +26,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import ttftcuts.atg.api.ATGBiomes;
+import ttftcuts.atg.api.ATGBiomes.BiomeType;
 import Reika.DragonAPI.DragonAPICore;
 import Reika.DragonAPI.ModList;
 import Reika.DragonAPI.Auxiliary.BiomeCollisionTracker;
@@ -66,6 +68,8 @@ public class EnderForest extends DragonAPIMod {
 
 	public static final Material enderMat = new Material(MapColor.ironColor);
 
+	public static BiomeEnderForest biome;
+
 	@Override
 	@EventHandler
 	public void preload(FMLPreInitializationEvent evt) {
@@ -83,7 +87,8 @@ public class EnderForest extends DragonAPIMod {
 	@Override
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		GameRegistry.addBiome(new BiomeEnderForest(EnderOptions.BIOME.getValue()));
+		biome = new BiomeEnderForest(EnderOptions.BIOME.getValue());
+		GameRegistry.addBiome(biome);
 
 		ReikaRegistryHelper.instantiateAndRegisterBlocks(instance, EnderBlocks.blockList, blocks);
 		ReikaRegistryHelper.instantiateAndRegisterItems(instance, EnderItems.itemList, items);
@@ -94,6 +99,8 @@ public class EnderForest extends DragonAPIMod {
 		ender.setBlockID(EnderBlocks.LIQUID.getBlockID());
 		//ender.setIcons(EnderBlocks.STILL.getBlockInstance().getIcon(0,0), EnderBlocks.FLOWING.getBlockInstance().getIcon(0,0));
 		FluidContainerRegistry.registerFluidContainer(new FluidStack(ender, 1000), EnderItems.BUCKET.getStackOf(), new ItemStack(Item.bucketEmpty));
+
+		ATGBiomes.addBiome(BiomeType.LAND, "Forest", biome, 1.0);
 	}
 
 	public Block getEnderBlockToGenerate() {
