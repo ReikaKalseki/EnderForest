@@ -90,10 +90,10 @@ public class EnderForest extends DragonAPIMod {
 		biome = new BiomeEnderForest(EnderOptions.BIOME.getValue());
 		GameRegistry.addBiome(biome);
 
+		FluidRegistry.registerFluid(ender);
 		ReikaRegistryHelper.instantiateAndRegisterBlocks(instance, EnderBlocks.blockList, blocks);
 		ReikaRegistryHelper.instantiateAndRegisterItems(instance, EnderItems.itemList, items);
 
-		FluidRegistry.registerFluid(ender);
 		BlockLiquidEnder b = (BlockLiquidEnder)EnderBlocks.LIQUID.getBlockInstance();
 		ender.setIcons(b.theIcon[0], b.theIcon[1]);
 		ender.setBlockID(EnderBlocks.LIQUID.getBlockID());
