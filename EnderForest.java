@@ -81,7 +81,7 @@ public class EnderForest extends DragonAPIMod {
 		ReikaRegistryHelper.setupModData(instance, evt);
 		ReikaRegistryHelper.setupVersionChecking(evt);
 
-		BiomeCollisionTracker.instance.addBiomeID(ModList.ENDERFOREST, EnderOptions.BIOME.getValue(), BiomeEnderForest.class);
+		BiomeCollisionTracker.instance.addBiomeID(instance, EnderOptions.BIOME.getValue(), BiomeEnderForest.class);
 	}
 
 	@Override
