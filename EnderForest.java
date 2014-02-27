@@ -98,7 +98,8 @@ public class EnderForest extends DragonAPIMod {
 		ender.setIcons(b.theIcon[0], b.theIcon[1]);
 		ender.setBlockID(EnderBlocks.LIQUID.getBlockID());
 		//ender.setIcons(EnderBlocks.STILL.getBlockInstance().getIcon(0,0), EnderBlocks.FLOWING.getBlockInstance().getIcon(0,0));
-		FluidContainerRegistry.registerFluidContainer(new FluidStack(ender, 1000), EnderItems.BUCKET.getStackOf(), new ItemStack(Item.bucketEmpty));
+		if (!ModList.THERMALEXPANSION.isLoaded())
+			FluidContainerRegistry.registerFluidContainer(new FluidStack(ender, 1000), EnderItems.BUCKET.getStackOf(), new ItemStack(Item.bucketEmpty));
 
 		ATGBiomes.addBiome(BiomeType.LAND, "Forest", biome, 1.0);
 	}
