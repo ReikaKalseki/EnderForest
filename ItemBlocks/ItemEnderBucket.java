@@ -24,6 +24,7 @@ public class ItemEnderBucket extends Item {
 	public ItemEnderBucket(int par1) {
 		super(par1);
 		this.setCreativeTab(CreativeTabs.tabMisc);
+		this.setContainerItem(Item.bucketEmpty);
 	}
 
 	@Override
