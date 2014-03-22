@@ -14,10 +14,13 @@ import java.net.URL;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -36,7 +39,6 @@ import Reika.DragonAPI.Instantiable.IO.ControlledConfig;
 import Reika.DragonAPI.Instantiable.IO.ModLogger;
 import Reika.DragonAPI.Libraries.ReikaRegistryHelper;
 import Reika.DragonAPI.ModInteract.ThermalHandler;
-import Reika.EnderForest.ItemBlocks.BlockLiquidEnder;
 import Reika.EnderForest.Registry.EnderBlocks;
 import Reika.EnderForest.Registry.EnderItems;
 import Reika.EnderForest.Registry.EnderOptions;
@@ -49,6 +51,8 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "EnderForest", name="Ender Forest", version="beta", certificateFingerprint = "@GET_FINGERPRINT@", dependencies="required-after:DragonAPI")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
@@ -94,14 +98,20 @@ public class EnderForest extends DragonAPIMod {
 		ReikaRegistryHelper.instantiateAndRegisterBlocks(instance, EnderBlocks.blockList, blocks);
 		ReikaRegistryHelper.instantiateAndRegisterItems(instance, EnderItems.itemList, items);
 
-		BlockLiquidEnder b = (BlockLiquidEnder)EnderBlocks.LIQUID.getBlockInstance();
-		ender.setIcons(b.theIcon[0], b.theIcon[1]);
-		ender.setBlockID(EnderBlocks.LIQUID.getBlockID());
 		//ender.setIcons(EnderBlocks.STILL.getBlockInstance().getIcon(0,0), EnderBlocks.FLOWING.getBlockInstance().getIcon(0,0));
 		if (!ModList.THERMALEXPANSION.isLoaded())
 			FluidContainerRegistry.registerFluidContainer(new FluidStack(ender, 1000), EnderItems.BUCKET.getStackOf(), new ItemStack(Item.bucketEmpty));
 
 		ATGBiomes.addBiome(BiomeType.LAND, "Forest", biome, 1.0);
+	}
+
+	@ForgeSubscribe
+	@SideOnly(Side.CLIENT)
+	public void textureHook(TextureStitchEvent.Pre event) {
+		IconRegister ico = event.map;
+		Icon[] icons = new Icon[]{ico.registerIcon("enderforest:ender"), ico.registerIcon("enderforest:flowingender")};
+		ender.setIcons(icons[0], icons[1]);
+		ender.setBlockID(EnderBlocks.LIQUID.getBlockID());
 	}
 
 	public Block getEnderBlockToGenerate() {
