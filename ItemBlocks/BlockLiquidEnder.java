@@ -75,6 +75,7 @@ public class BlockLiquidEnder extends BlockFluidClassic {
 		e.motionX = ReikaRandomHelper.getRandomPlusMinus(0, v);
 		e.motionZ = ReikaRandomHelper.getRandomPlusMinus(0, v);
 		e.motionY += 0.2;
+		e.fallDistance = 0;
 		//e.motionZ = -e.motionZ;
 		if (e instanceof EntityLivingBase)
 			e.playSound("mob.endermen.portal", 0.5F, 1.0F);
