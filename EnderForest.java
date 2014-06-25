@@ -21,7 +21,6 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event.Result;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
@@ -34,6 +33,7 @@ import ttftcuts.atg.api.ATGBiomes.BiomeType;
 import Reika.DragonAPI.DragonAPICore;
 import Reika.DragonAPI.ModList;
 import Reika.DragonAPI.Auxiliary.BiomeCollisionTracker;
+import Reika.DragonAPI.Auxiliary.CommandableUpdateChecker;
 import Reika.DragonAPI.Base.DragonAPIMod;
 import Reika.DragonAPI.Instantiable.IO.ControlledConfig;
 import Reika.DragonAPI.Instantiable.IO.ModLogger;
@@ -80,12 +80,10 @@ public class EnderForest extends DragonAPIMod {
 		config.loadSubfolderedConfigFile(evt);
 		config.initProps(evt);
 		logger = new ModLogger(instance, EnderOptions.LOGLOADING.getState(), EnderOptions.DEBUGMODE.getState(), false);
-		MinecraftForge.EVENT_BUS.register(this);
-
-		ReikaRegistryHelper.setupModData(instance, evt);
-		ReikaRegistryHelper.setupVersionChecking(evt);
 
 		BiomeCollisionTracker.instance.addBiomeID(instance, EnderOptions.BIOME.getValue(), BiomeEnderForest.class);
+
+		this.basicSetup(evt);
 	}
 
 	@Override
@@ -155,32 +153,22 @@ public class EnderForest extends DragonAPIMod {
 
 	@Override
 	public URL getDocumentationSite() {
-		return DragonAPICore.getReikaForumPage(instance);
-	}
-
-	@Override
-	public boolean hasWiki() {
-		return false;
-	}
-
-	@Override
-	public URL getWiki() {
-		return null;
-	}
-
-	@Override
-	public boolean hasVersion() {
-		return false;
-	}
-
-	@Override
-	public String getVersionName() {
-		return null;
+		return DragonAPICore.getReikaForumPage();
 	}
 
 	@Override
 	public ModLogger getModLogger() {
 		return logger;
+	}
+
+	@Override
+	public String getWiki() {
+		return null;
+	}
+
+	@Override
+	public String getUpdateCheckURL() {
+		return CommandableUpdateChecker.reikaURL;
 	}
 
 }
