@@ -79,7 +79,7 @@ public class EnderForest extends DragonAPIMod {
 	public void preload(FMLPreInitializationEvent evt) {
 		config.loadSubfolderedConfigFile(evt);
 		config.initProps(evt);
-		logger = new ModLogger(instance, EnderOptions.LOGLOADING.getState(), EnderOptions.DEBUGMODE.getState(), false);
+		logger = new ModLogger(instance, false);
 
 		BiomeCollisionTracker.instance.addBiomeID(instance, EnderOptions.BIOME.getValue(), BiomeEnderForest.class);
 

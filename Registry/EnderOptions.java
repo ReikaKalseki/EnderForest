@@ -16,8 +16,6 @@ import Reika.EnderForest.EnderForest;
 
 public enum EnderOptions implements ConfigList {
 
-	LOGLOADING("Console Loading Info", true),
-	DEBUGMODE("Debug Mode", false),
 	COLORING("Ender Forest Coloring", false),
 	POOLS("Ender Pool Density from 1 to 3", 2),
 	BIOME("Biome ID", 47),
