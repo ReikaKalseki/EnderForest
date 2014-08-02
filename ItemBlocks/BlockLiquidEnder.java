@@ -98,6 +98,6 @@ public class BlockLiquidEnder extends BlockFluidClassic {
 
 	@Override
 	public Icon getIcon(int s, int meta) {
-		return meta == 0 ? theIcon[0] : theIcon[1];
+		return s <= 1 ? theIcon[0] : theIcon[1];
 	}
 }
